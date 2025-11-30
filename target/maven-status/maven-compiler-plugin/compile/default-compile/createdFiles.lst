@@ -1,5 +1,6 @@
 Modelo\Curso.class
 Estructuras\NodoLista.class
+Estructuras\NodoPila.class
 Modelo\Estudiante.class
 Estructuras\Pila.class
 Estructuras\ArregloDinamico.class

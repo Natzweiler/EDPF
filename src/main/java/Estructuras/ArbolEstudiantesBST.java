@@ -16,12 +16,10 @@ public class ArbolEstudiantesBST {
     public ArbolEstudiantesBST() {
         this.raiz = null;
     }
-
-    // 1. MÉTODO PÚBLICO: El que llamarás desde el Main
+    
     public void insertar(Estudiante nuevoEstudiante) {
         this.raiz = insertarRecursivo(this.raiz, nuevoEstudiante);
     }
-
     
     private NodoBST insertarRecursivo(NodoBST actual, Estudiante nuevoEstudiante) {
         
@@ -38,5 +36,41 @@ public class ArbolEstudiantesBST {
         }
 
         return actual; 
+    }
+    
+    public void listarInOrder() {
+        listarInOrderRecursivo(this.raiz);
+        System.out.println(); 
+    }
+
+    private void listarInOrderRecursivo(NodoBST actual) {
+        
+        if (actual == null) {
+            return;
+        }
+        listarInOrderRecursivo(actual.izquierda);
+        System.out.println(actual.estudiante.toString());
+        listarInOrderRecursivo(actual.derecha);
+    }
+
+    public Estudiante buscar(int matricula) {
+        return buscarRecursivo(this.raiz, matricula);
+    }
+
+    private Estudiante buscarRecursivo(NodoBST actual, int matriculaBuscada) {
+       
+        if (actual == null) {
+            return null; 
+        }
+
+        if (matriculaBuscada == actual.estudiante.getMatricula()) {
+            return actual.estudiante;
+        }
+
+        if (matriculaBuscada < actual.estudiante.getMatricula()) {
+            return buscarRecursivo(actual.izquierda, matriculaBuscada);
+        } else {
+            return buscarRecursivo(actual.derecha, matriculaBuscada);
+        }
     }
 }

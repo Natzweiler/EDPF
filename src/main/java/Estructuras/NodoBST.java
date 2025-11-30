@@ -16,16 +16,10 @@ public class NodoBST {
     NodoBST izquierda;
     NodoBST derecha;
 
-    public NodoBST(Estudiante estudiante, NodoBST izquierda, NodoBST derecha) {
+    public NodoBST(Estudiante estudiante) {
         this.estudiante = estudiante;
-        this.izquierda = izquierda;
-        this.derecha = derecha;
+        this.izquierda = null;
+        this.derecha = null;
     }
-
-    NodoBST(Estudiante nuevoEstudiante) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    
     
 }

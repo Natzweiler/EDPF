@@ -4,18 +4,16 @@
  */
 package Estructuras;
 
-import Modelo.Estudiante;
-
 /**
  *
  * @author Gael
  */
-public class NodoLista {
-    public Estudiante estudiante; 
-    public NodoLista siguiente;   
+public class NodoPila {
+    String accion;     
+    NodoPila siguiente; 
 
-    public NodoLista(Estudiante estudiante) {
-        this.estudiante = estudiante;
+    public NodoPila(String accion) {
+        this.accion = accion;
         this.siguiente = null;
     }
 }
