@@ -24,12 +24,11 @@ public class EDPF {
 
     public static void main(String[] args) {
         int opcion = 0;
-        precargarDatos();
+        datosMock();
 
         do {
-            System.out.println("\n========================================");
             System.out.println("      SISTEMA DE GESTIÓN ESCOLAR");
-            System.out.println("========================================");
+            System.out.println("-----------------------------------");
             System.out.println("1. GESTIÓN DE ESTUDIANTES");
             System.out.println("   1.1 Registrar estudiante");
             System.out.println("   1.2 Buscar estudiante");
@@ -57,22 +56,25 @@ public class EDPF {
                 }
                 
                 switch (opcion) {
-                    case 1: menuEstudiantes(); break;
-                    case 2: menuCursos(); break;
-                    case 3: menuInscripciones(); break;
-                    case 4: menuCalificaciones(); break;
+                    case 1: menuEstudiantes(); 
+                    break;
+                    case 2: menuCursos(); 
+                    break;
+                    case 3: menuInscripciones();
+                    break;
+                    case 4: menuCalificaciones();
+                    break;
                     case 5: 
                         historial.mostrarHistorial(); 
                         break;
                     case 6: 
-                        System.out.println("Saliendo del sistema..."); 
                         break;
                     default: 
-                        System.out.println("Opción no válida.");
+                        System.out.println("Opcion no valida.");
                 }
 
             } catch (Exception e) {
-                System.out.println("Error: Ingrese un número válido. (" + e.getMessage() + ")");
+                System.out.println("Error: Ingrese un numero valido. (" + e.getMessage() + ")");
             }
 
         } while (opcion != 6);
@@ -83,16 +85,16 @@ public class EDPF {
         System.out.println("1. Registrar");
         System.out.println("2. Buscar");
         System.out.println("3. Listar");
-        System.out.print("Opción: ");
+        System.out.print("Opcion: ");
         int op = Integer.parseInt(sc.nextLine());
 
         switch (op) {
             case 1: 
-                System.out.print("Matrícula (Números): ");
+                System.out.print("Matricula: ");
                 int mat = Integer.parseInt(sc.nextLine());
                 System.out.print("Nombre completo: ");
                 String nom = sc.nextLine();
-                System.out.print("Teléfono: ");
+                System.out.print("Telefono: ");
                 String tel = sc.nextLine();
                 System.out.print("Email: ");
                 String email = sc.nextLine();
@@ -102,23 +104,23 @@ public class EDPF {
                 Estudiante nuevo = new Estudiante(nom, mat, tel, email, dom);
                 arbol.insertar(nuevo);
                 historial.push("Registro: Estudiante " + mat + " (" + nom + ")");
-                System.out.println("¡Estudiante registrado con éxito!");
+                System.out.println("Estudiante registrado.");
                 break;
 
             case 2: 
-                System.out.print("Ingrese matrícula a buscar: ");
+                System.out.print("Ingrese matricula a buscar: ");
                 int buscaMat = Integer.parseInt(sc.nextLine());
                 Estudiante encontrado = arbol.buscar(buscaMat);
                 if (encontrado != null) {
                     System.out.println("--- DATOS ENCONTRADOS ---");
                     System.out.println(encontrado.toString());
                 } else {
-                    System.out.println("No se encontró estudiante con esa matrícula.");
+                    System.out.println("No se encontro estudiante con esa matricula.");
                 }
                 break;
 
             case 3: 
-                System.out.println("--- LISTA DE ESTUDIANTES (Ordenada por Matrícula) ---");
+                System.out.println("--- LISTA DE ESTUDIANTES ---");
                 arbol.listarInOrder();
                 break;
         }
@@ -132,7 +134,7 @@ public class EDPF {
         int op = Integer.parseInt(sc.nextLine());
 
         if (op == 1) {
-            System.out.print("Código del curso (ej. MAT101): ");
+            System.out.print("Codigo del curso: ");
             String cod = sc.nextLine();
             System.out.print("Nombre de la materia: ");
             String nom = sc.nextLine();
@@ -156,7 +158,7 @@ public class EDPF {
         System.out.print("Opción: ");
         int op = Integer.parseInt(sc.nextLine());
 
-        System.out.print("Ingrese el CÓDIGO del curso: ");
+        System.out.print("Ingrese el codigo del curso: ");
         String codigo = sc.nextLine();
         Curso cursoSeleccionado = buscarCursoPorCodigo(codigo);
 
@@ -166,15 +168,15 @@ public class EDPF {
         }
 
         if (op == 1) {
-            System.out.print("Ingrese MATRÍCULA del estudiante: ");
+            System.out.print("Ingrese matricula del estudiante: ");
             int mat = Integer.parseInt(sc.nextLine());
             Estudiante est = arbol.buscar(mat);
 
             if (est != null) {
                 cursoSeleccionado.inscribirEstudiante(est);
-                historial.push("Inscripción: " + mat + " en " + codigo);
+                historial.push("Inscripcion: " + mat + " en " + codigo);
             } else {
-                System.out.println("Error: Estudiante no encontrado.");
+                System.out.println("Error:Estudiante no encontrado.");
             }
         } else if (op == 2) {
             cursoSeleccionado.getInscritos();
@@ -188,7 +190,7 @@ public class EDPF {
         System.out.print("Opción: ");
         int op = Integer.parseInt(sc.nextLine());
 
-        System.out.print("Ingrese MATRÍCULA del estudiante: ");
+        System.out.print("Ingrese matricula del estudiante: ");
         int mat = Integer.parseInt(sc.nextLine());
         Estudiante est = arbol.buscar(mat);
 
@@ -198,16 +200,16 @@ public class EDPF {
         }
 
         if (op == 1) {
-            System.out.print("Ingrese CÓDIGO del curso a calificar: ");
+            System.out.print("Ingrese codigo del curso a calificar: ");
             String codigo = sc.nextLine();
             Curso curso = buscarCursoPorCodigo(codigo);
 
             if (curso != null) {
-                System.out.print("Ingrese la Calificación (ej. 9.5): ");
+                System.out.print("Ingrese la calificacion: ");
                 double nota = Double.parseDouble(sc.nextLine());
                 est.agregarCalificacion(curso, nota);
                 historial.push("Calif: " + nota + " a " + est.getNombre() + " en " + codigo);
-                System.out.println("Calificación registrada.");
+                System.out.println("Calificacion registrada.");
             } else {
                 System.out.println("Curso no encontrado.");
             }
@@ -226,7 +228,7 @@ public class EDPF {
         return null;
     }
 
-    public static void precargarDatos() {
+    public static void datosMock() {
         
         Estudiante e1 = new Estudiante("Juan Perez", 253001, "6441001122", "juan@test.com", "Calle 1");
         Estudiante e2 = new Estudiante("Ana Lopez", 200100, "6442003344", "ana@test.com", "Calle 2");

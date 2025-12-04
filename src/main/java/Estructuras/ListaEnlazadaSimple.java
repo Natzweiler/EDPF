@@ -33,7 +33,7 @@ public class ListaEnlazadaSimple {
 
     public void listar() {
         if (cabeza == null) {
-            System.out.println("   (No hay alumnos inscritos)");
+            System.out.println("No hay alumnos inscritos");
             return;
         }
 

@@ -31,7 +31,7 @@ public class Pila {
 
     public void mostrarHistorial() {
         if (tope == null) {
-            System.out.println("   (El historial está vacío)");
+            System.out.println("El historial está vacio");
             return;
         }
 
